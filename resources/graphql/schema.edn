@@ -29,7 +29,7 @@
    :resolve :query/word-by-id}
 
   :lesson_by_detail
-  {:type (list :Word)
+  {:type :Lesson
    :description "query the lesson by detail info.
 the gtls is: grand, term, lesson, symbol"
    :args {:lesson_num {:type (non-null Int) :description "lesson number"}

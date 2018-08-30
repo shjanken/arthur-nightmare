@@ -17,9 +17,14 @@
 
 (defn query-lesson-by-detail
   [_ args _]
-  (println args)
-  (let [{:keys [grand term symbol lesson]} args]
-    (into [] (db/get-lessons {:grand grand :term term :lesson_num lesson :symbol symbol}))))
+  ;; (println args)
+  (let [{:keys [grand term symbol lesson_num]} args]
+    ;;(println grand term symbol lesson)
+    {:words
+     (db/get-lessons {:grand grand
+                      :term term
+                      :lesson_num lesson_num
+                      :symbol symbol})}))
 
 (comment
   (db/get-lessons {:grand 1 :term 1 :lesson_num 10 :symbol "garden"})
