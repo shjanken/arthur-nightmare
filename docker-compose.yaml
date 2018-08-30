@@ -1,0 +1,8 @@
+db:
+  image: postgres:alpine
+  environment:
+    POSTGRES_PASSWORD: arthur
+    POSTGRES_USER: arthur
+    POSTGRES_DB: arthur
+  ports:
+    - 25432:5432

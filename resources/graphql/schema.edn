@@ -1,0 +1,40 @@
+{:objects
+ {:Word
+  {:description "The lesson what arthur study every day"
+   :fields
+   {:lesson_num {:type (non-null Int)
+             :description "The lesson number"}
+    :grand {:type (non-null Int)
+            :description "grand number"}
+    :term {:type (non-null Int)
+           :description "term number. just 1 or 2"}
+    :symbol {:type (non-null String)
+             :description "type of lesson. 1 :- lesson, 2 :- word , 3 :- garden"}
+    :context {:type (non-null String)
+              :description "context of every lesson"}
+    :py {:type String
+         :description "py of context. format is 'context:(1,2,3,4)'"}
+    :id {:type (non-null ID)}}}
+
+  :Lesson
+  {:description "list of words, contain all word of current lesson"
+   :fields {:words {:type (list :Word)
+                    :descritpion "words of current lesson"}}}}
+
+ :queries
+ {:word_by_id
+  {:type :Word
+   :description "query the lesson info by id"
+   :args {:id {:type ID}}
+   :resolve :query/word-by-id}
+
+  :lesson_by_detail
+  {:type (list :Word)
+   :description "query the lesson by detail info.
+the gtls is: grand, term, lesson, symbol"
+   :args {:lesson_num {:type (non-null Int) :description "lesson number"}
+          :grand {:type (non-null Int) :description "grand number"}
+          :term {:type (non-null Int) :description "term number"}
+          :symbol {:type (non-null String)
+                   :description "the value is lesson or word or garden"}}
+   :resolve :query/lesson-by-detail}}}
