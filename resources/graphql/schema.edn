@@ -20,9 +20,12 @@
   {:description "list of words, contain all word of current lesson"
    :fields {:words {:type (list :Word)
                     :descritpion "words of current lesson"}
-            :min_id {:type (non-null Int)
+            :min_id {:type Int
                      :description "the minimum id of word in this lesson"
-                     :resolve :query/lesson-min-id}}}}
+                     :resolve :query/lesson-min-id}
+            :max_id {:type Int
+                     :description "the maximun id of word in this lesson"
+                     :resolve :query/lesson-max-id}}}}
 
  :queries
  {:word_by_id
