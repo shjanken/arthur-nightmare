@@ -1,4 +1,4 @@
-(ns arthuri-nightmare.db.maintain
+(ns arthur-nightmare.db.maintain
   (:require [clojure.java.io :as io]
             [arthur-nightmare.db.core :as db]
             [clojure.walk :refer [walk]]
