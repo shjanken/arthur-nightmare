@@ -30,10 +30,33 @@
   (db/get-lessons {:grand 1 :term 1 :lesson_num 10 :symbol "garden"})
   )
 
+(defn query-lesson-min-id
+  "query the min id of word in the current lesson"
+  [_ _ context]
+  ;; (println context)
+  (->> context
+       :words
+       (map :id)
+       (reduce min)))
+
+(comment
+  (-> "{lesson_by_detail(grand: 1, term: 1, symbol: \"garden\", lesson_num: 10)
+{min_id}}"
+      (execute-request))
+  )
+
+(defn query-lesson-max-id
+  "query the max id of word in the current lesson"
+  [_ _ context]
+  (println context)
+  nil)
+
 (defn resolve-fns
   []
   {:query/word-by-id query-word-by-id
-   :query/lesson-by-detail query-lesson-by-detail})
+   :query/lesson-by-detail query-lesson-by-detail
+   :query/lesson-max-id query-lesson-max-id
+   :query/lesson-min-id query-lesson-min-id})
 
 (defstate compiled-schema
   :start
