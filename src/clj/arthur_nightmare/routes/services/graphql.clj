@@ -24,7 +24,7 @@
      (db/get-lessons {:grand grand
                       :term term
                       :lesson_num lesson_num
-                      :symbol (name symbol)})}))i
+                      :symbol (name symbol)})}))
 
 (comment
   (db/get-lessons {:grand 1 :term 1 :lesson_num 10 :symbol "garden"})
