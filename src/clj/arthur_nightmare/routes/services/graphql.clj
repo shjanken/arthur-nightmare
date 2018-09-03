@@ -17,32 +17,18 @@
 
 (defn query-lesson-by-detail
   [_ args _]
-  ;; (println args)
+  (println args)
   (let [{:keys [grand term symbol lesson_num]} args]
     ;;(println grand term symbol lesson)
     {:words
      (db/get-lessons {:grand grand
                       :term term
                       :lesson_num lesson_num
-                      :symbol symbol})}))
+                      :symbol (name symbol)})}))i
 
 (comment
   (db/get-lessons {:grand 1 :term 1 :lesson_num 10 :symbol "garden"})
   )
-
-;; (defn query-lesson-min-id
-;;   [_ _ context]
-;;   (->> context
-;;        :words
-;;        (map :id)
-;;        (reduce min)))
-
-;; (defn query-lesson-max-id
-;;   [_ _ context]
-;;   (->> context
-;;        :words
-;;        (map :id)
-;;        (reduce max)))
 
 (defn query-word-id-by-condition-func
   [fn context args value]
@@ -54,12 +40,19 @@
 (def query-lesson-min-id (partial query-word-id-by-condition-func min))
 (def query-lesson-max-id (partial query-word-id-by-condition-func max))
 
+(defn query-words-by-range
+  [_ args _]
+  (let [begin (:begin args)
+        end (:end args)]
+    (db/get-word-by-range {:begin begin :end end})))
+
 (defn resolve-fns
   []
   {:query/word-by-id query-word-by-id
    :query/lesson-by-detail query-lesson-by-detail
    :query/lesson-min-id query-lesson-min-id
-   :query/lesson-max-id query-lesson-max-id})
+   :query/lesson-max-id query-lesson-max-id
+   :query/words-by-range query-words-by-range})
 
 (defstate compiled-schema
   :start

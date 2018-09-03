@@ -41,3 +41,8 @@ where grand = :grand
  and symbol = :symbol::lesson_type
  and lesson_num = :lesson_num
  and term = :term
+
+-- :name get-word-by-range :? :*
+-- :doc get words by start and end range(id)
+select * from lesson
+where id between :begin and :end
