@@ -23,9 +23,9 @@ WHERE id = :id
 -- :name create-lesson! :! :n
 -- :doc create a lesson record
 insert into lesson
-(grand, term, lesson_num, symbol, context, py)
+(grand, term, lesson_num, symbol, context, py, ord)
 values
-(:grand, :term, :lesson_num, :symbol::lesson_type, :context, :py)
+(:grand, :term, :lesson_num, :symbol::lesson_type, :context, :py, :order)
 
 
 -- :name get-word :? :1

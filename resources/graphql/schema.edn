@@ -19,7 +19,8 @@
               :description "context of every lesson"}
     :py {:type String
          :description "py of context. format is 'context:(1,2,3,4)'"}
-    :id {:type (non-null ID)}}}
+    :id {:type (non-null ID)}
+    :ord {:type (non-null Int)}}}
 
   :Lesson
   {:description "list of words, contain all word of current lesson"

@@ -7,5 +7,6 @@ CREATE TABLE lesson (
        term integer not null,
        symbol lesson_type not null,
        context varchar(20) not null,
-       py varchar(50)
+       py varchar(50),
+       ord integer not null
 );

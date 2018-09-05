@@ -17,7 +17,7 @@
 
 (defn query-lesson-by-detail
   [_ args _]
-  (println args)
+;;  (println args)
   (let [{:keys [grand term symbol lesson_num]} args]
     ;;(println grand term symbol lesson)
     {:words
@@ -27,11 +27,13 @@
                       :symbol (name symbol)})}))
 
 (comment
-  (db/get-lessons {:grand 1 :term 1 :lesson_num 10 :symbol "garden"})
+  (db/get-lessons {:grand 1 :term 1 :lesson_num 3 :symbol "word"})
   )
 
 (defn query-word-id-by-condition-func
   [fn context args value]
+  ;;  (println value)
+  (when-let [words (not-empty? (:words value))])
   (->> value
        :words
        (map :id)
@@ -72,3 +74,33 @@
           context nil]
     (-> (lacinia/execute compiled-schema query vars context)
         (json/write-str))))
+
+(comment
+  ;; test hanlp
+  (import com.hankcs.hanlp.HanLP)
+  (println (HanLP/segment "你好，这个是 hanlp 程序包"))
+
+  ;; test practice
+
+  (defn term->str
+    [term]
+    (.. term word))
+
+  (defn create-tmp
+    []
+    (let [lesson-data (db/get-lessons {:grand 1 :term 1
+                                       :lesson_num 10 :symbol "lesson"})
+          orther-data (db/get-word-by-range {:begin 10 :end 100})]
+      'pass))
+
+  (create-tmp)
+  
+  (->> 
+   (db/get-word-by-range {:begin 1 :end 99})
+   (map :context)
+   (clojure.string/join "")
+   HanLP/segment
+   (map term->str)
+   (filter #(> (count %) 1) ))
+  
+  )

@@ -30,7 +30,8 @@
                  [ring-webjars "0.2.0"]
                  [ring/ring-core "1.6.3"]
                  [ring/ring-defaults "0.3.2"]
-                 [selmer "1.12.0"]]
+                 [selmer "1.12.0"]
+                 [com.hankcs/hanlp "portable-1.6.8"]]
 
   :min-lein-version "2.0.0"
   
