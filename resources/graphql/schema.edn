@@ -20,7 +20,7 @@
     :py {:type String
          :description "py of context. format is 'context:(1,2,3,4)'"}
     :id {:type (non-null ID)}
-    :ord {:type (non-null Int)}}}
+    :ord {:type Int}}}
 
   :Lesson
   {:description "list of words, contain all word of current lesson"
@@ -78,5 +78,17 @@ the gtls is: grand, term, lesson, symbol"
           :lesson_num {:type (non-null Int) :description "lesson num"}
           :begin {:type (non-null Int) :description "begin id of ranger"}
           :end {:type (non-null Int) :description "end id of ranger"}}
-   :resolve :query/phrase}
-  }}
+   :resolve :query/phrase}}
+
+ :mutations
+ {:word
+  {:type Int
+   :description "add a word record to the database"
+   :args {:grand {:type (non-null Int)}
+          :term {:type (non-null Int)}
+          :symbol {:type (non-null :Symbol)}
+          :lesson_num {:type (non-null Int)}
+          :context {:type (non-null String)}
+          :py {:type (non-null String)}
+          :ord {:type (non-null Int)}}
+   :resolve :mutation/word}}}

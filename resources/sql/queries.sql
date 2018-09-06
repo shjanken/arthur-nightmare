@@ -59,3 +59,12 @@ from
 	where grand=:grand and term=:term and lesson_num=:lesson_num and symbol=:symbol::lesson_type) main
 ,
 	(select * from lesson where id between :begin and :end) ranger
+
+
+-- :name insert-word :! :n
+-- :doc insert a word record
+insert into lesson
+(lesson_num, grand, term,  symbol, context, py, ord)
+values
+(:lesson_num, :grand, :term, :symbol::lesson_type, :context, :py, :ord)
+

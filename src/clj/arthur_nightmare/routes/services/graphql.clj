@@ -58,6 +58,16 @@
                    :begin begin
                    :end end}))
 
+(defn insert-word
+  [_ {:keys [grand term lesson_num symbol context py ord]} _]
+  (db/insert-word {:grand grand
+                   :term term
+                   :lesson_num lesson_num
+                   :symbol (name symbol)
+                   :context context
+                   :py py
+                   :ord ord}))
+
 (defn resolve-fns
   []
   {:query/word-by-id query-word-by-id
@@ -65,7 +75,8 @@
    :query/lesson-min-id query-lesson-min-id
    :query/lesson-max-id query-lesson-max-id
    :query/words-by-range query-words-by-range
-   :query/phrase query-phrase})
+   :query/phrase query-phrase
+   :mutation/word insert-word})
 
 (defstate compiled-schema
   :start
