@@ -8,7 +8,7 @@
   {:description "The lesson what arthur study every day"
    :fields
    {:lesson_num {:type (non-null Int)
-             :description "The lesson number"}
+                 :description "The lesson number"}
     :grand {:type (non-null Int)
             :description "grand number"}
     :term {:type (non-null Int)
@@ -31,7 +31,16 @@
                      :resolve :query/lesson-min-id}
             :max_id {:type Int
                      :description "the maximun id of word in this lesson"
-                     :resolve :query/lesson-max-id}}}}
+                     :resolve :query/lesson-max-id}}}
+
+  :Phrase
+  {:description "the return type of phrase"
+   :fields {:context {:type (non-null String)
+                      :description "the context compose with word"}
+            :main_id {:type (non-null Int)
+                      :description "the first word id in the table"}
+            :ranger_id {:type (non-null Int)
+                        :description "the second word id in the table"}}}}
 
  :queries
  {:word_by_id
@@ -58,4 +67,16 @@ the gtls is: grand, term, lesson, symbol"
                   :description "the query begin with"}
           :end {:type (non-null Int)
                 :description "the query end with"}}
-   :resolve :query/words-by-range}}}
+   :resolve :query/words-by-range}
+
+  :query_phrases
+  {:type (list :Phrase)
+   :description "query the phrase compose with current lesson's words and the word in range"
+   :args {:grand {:type (non-null Int) :description "the grand"}
+          :term {:type (non-null Int) :description "the term"}
+          :symbol {:type (non-null :Symbol) :description "the symbol of the lesson"}
+          :lesson_num {:type (non-null Int) :description "lesson num"}
+          :begin {:type (non-null Int) :description "begin id of ranger"}
+          :end {:type (non-null Int) :description "end id of ranger"}}
+   :resolve :query/phrase}
+  }}

@@ -4,5 +4,6 @@ db:
     POSTGRES_PASSWORD: arthur
     POSTGRES_USER: arthur
     POSTGRES_DB: arthur
+    EDITOR: vim
   ports:
     - 25432:5432

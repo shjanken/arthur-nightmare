@@ -46,3 +46,16 @@ where grand = :grand
 -- :doc get words by start and end range(id)
 select * from lesson
 where id between :begin and :end
+
+-- :name get-phrases :? :*
+-- :doc get phrase what is zip with current lesson and ranger of word
+select
+	main.context || ranger.context as context,
+	main.id as main_id,
+	ranger.id as range_id
+from
+	(select *
+	from lesson
+	where grand=:grand and term=:term and lesson_num=:lesson_num and symbol=:symbol::lesson_type) main
+,
+	(select * from lesson where id between :begin and :end) ranger

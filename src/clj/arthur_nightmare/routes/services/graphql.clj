@@ -33,11 +33,11 @@
 (defn query-word-id-by-condition-func
   [fn context args value]
   ;;  (println value)
-  (when-let [words (not-empty? (:words value))])
-  (->> value
-       :words
-       (map :id)
-       (reduce fn)))
+  (when-let [words (not (empty? (:words value)))]
+    (->> value
+         :words
+         (map :id)
+         (reduce fn))))
 
 (def query-lesson-min-id (partial query-word-id-by-condition-func min))
 (def query-lesson-max-id (partial query-word-id-by-condition-func max))
@@ -48,13 +48,24 @@
         end (:end args)]
     (db/get-word-by-range {:begin begin :end end})))
 
+(defn query-phrase
+  "query the phrase by condition"
+  [_ {:keys [grand symbol term lesson_num begin end]} _]
+  (db/get-phrases {:grand grand
+                   :symbol (name symbol)
+                   :term term
+                   :lesson_num lesson_num
+                   :begin begin
+                   :end end}))
+
 (defn resolve-fns
   []
   {:query/word-by-id query-word-by-id
    :query/lesson-by-detail query-lesson-by-detail
    :query/lesson-min-id query-lesson-min-id
    :query/lesson-max-id query-lesson-max-id
-   :query/words-by-range query-words-by-range})
+   :query/words-by-range query-words-by-range
+   :query/phrase query-phrase})
 
 (defstate compiled-schema
   :start
