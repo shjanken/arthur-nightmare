@@ -35,11 +35,11 @@
 
   :Phrase
   {:description "the return type of phrase"
-   :fields {:context {:type (non-null String)
+   :fields {:context {:type String
                       :description "the context compose with word"}
-            :main_id {:type (non-null Int)
+            :main_id {:type Int
                       :description "the first word id in the table"}
-            :ranger_id {:type (non-null Int)
+            :ranger_id {:type Int
                         :description "the second word id in the table"}}}}
 
  :queries
